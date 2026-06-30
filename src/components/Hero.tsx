@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ShieldCheck, Clock, Smartphone } from "lucide-react";
 import { BUSINESS, whatsappLink } from "@/lib/constants";
+import { categoryVisual } from "@/lib/categoryVisuals";
 
 export default function Hero() {
   return (
@@ -28,7 +29,7 @@ export default function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
+            
               href={whatsappLink(`Hi ${BUSINESS.name}, I'd like to chat about a repair or a product.`)}
               target="_blank"
               rel="noopener noreferrer"
@@ -83,12 +84,14 @@ function Stat({ icon, label }: { icon: React.ReactNode; label: string }) {
 }
 
 function DeviceTile({ label, delay }: { label: string; delay: string }) {
+  const { icon: Icon, gradient } = categoryVisual(label);
   return (
     <div
-      className="reveal flex flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-gradient-to-br from-surface to-bg-soft text-center transition-transform hover:scale-[1.03]"
+      className={`reveal flex flex-col items-center justify-center gap-2.5 rounded-2xl border border-border bg-gradient-to-br ${gradient} text-center transition-transform hover:scale-[1.03]`}
       style={{ animationDelay: delay }}
     >
-      <span className="font-display text-sm font-semibold text-text-dim">
+      <Icon className="h-7 w-7 text-text" strokeWidth={1.5} />
+      <span className="font-display text-sm font-semibold text-text">
         {label}
       </span>
     </div>
